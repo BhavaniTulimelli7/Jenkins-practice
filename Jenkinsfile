@@ -1,11 +1,17 @@
 pipeline {
     agent {label 'AGENT-1'}
+    environment {
+        PROJECT = 'EXPENSE'
+        COMPONENT = 'BACKEND'
+    }
     stages {
         stage('Build') {
             steps {
                 script{
                     sh """
                         echo "Hello, this is build"
+                        echo "Project is : $PROJECT"
+                        echo "component is : $COMPONENT"
                     """
                 }
             }
@@ -24,7 +30,6 @@ pipeline {
                 script {
                     sh """
                         echo "Hello, this is deploy"
-                        bjhk
                     """
                 }
             }
