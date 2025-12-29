@@ -17,7 +17,6 @@ pipeline {
                         echo "Hello, this is build"
                         echo "Project is : $PROJECT"
                         echo "component is : $COMPONENT"
-                        sleep 25
                     """
                 }
             }
@@ -40,6 +39,32 @@ pipeline {
                     sh """
                         echo "Hello, this is deploy"
                     """
+                }
+            }
+        }
+        stage('Parallel Stages') {
+            parallel {
+                stage('STAGE-1') {
+                    
+                    steps {
+                        script{
+                            sh """
+                                echo "Hello, this is STAGE-1"
+                                sleep 10
+                            """
+                        }
+                    }
+                }
+                stage('STAGE-2') {
+                    
+                    steps {
+                        script{
+                            sh """
+                                echo "Hello, this is STAGE-2"
+                                sleep 10
+                            """
+                        }
+                    }
                 }
             }
         }
