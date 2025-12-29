@@ -3,6 +3,7 @@ pipeline {
     environment {
         PROJECT = 'EXPENSE'
         COMPONENT = 'BACKEND'
+        DEPLOY_TO = 'QA'
     }
     options{
         disableConcurrentBuilds()
@@ -31,6 +32,9 @@ pipeline {
             }
         }
         stage('Deploy') {
+            when { 
+                environment name: 'DEPLOY_TO', value: 'production'
+            }
             steps {
                 script {
                     sh """
